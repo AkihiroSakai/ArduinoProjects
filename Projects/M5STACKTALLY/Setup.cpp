@@ -184,6 +184,7 @@ void disp_setup(bool init)
         sprintf(buff, "%d", param.brightness);
         break;
       case  EN_SETTING_CAMNUM:
+        sprintf(buff, "%d", param.cameranum);
         break;
     }
 
@@ -370,7 +371,7 @@ void exe_button_setting(int operation)
       break;
     case  EN_SETTING_SSID:
 
-      ssid_cursor -= operation;
+      ssid_cursor += operation;
       if (ssid_cursor >= scannet_num)
       {
         ssid_cursor = 0;
@@ -485,7 +486,7 @@ void btn_Setup(void)
 				case EN_SETTING_PASS:
 					break;
 				default:
-					exe_button_setting(-1);
+					exe_button_setting(+1);
 					break;
 			}
 		}
@@ -521,7 +522,7 @@ void btn_Setup(void)
 				}
 				break;
 			default:
-				exe_button_setting(+1);
+				exe_button_setting(-1);
 				break;
 			}
 		}

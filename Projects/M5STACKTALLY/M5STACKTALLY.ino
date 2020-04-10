@@ -25,13 +25,6 @@
 #include "ATEMTally.h"
 
 
-//extern ST_KEYBOARD stPassword;
-//extern int setting_cursor;
-//extern int ssid_cursor;
-//extern bool setting_Edit;
-//extern int scannet_num;
-//extern bool is34CAMSwitch;
-
 ATEMmax AtemSwitcher;
 EN_FUNCMODE funcmode = EN_FUNCMODE_HOME;
 ST_PARAM param;
@@ -77,9 +70,8 @@ void setup() {
 
   WiFi.mode(WIFI_STA);
   Serial.println((char*)param.ssid);
-  Serial.println((char*)param.pass);
+//  Serial.println((char*)param.pass);
   WiFi.begin((char*)param.ssid, (char*) param.pass);
-  Serial.println("");
 
   // Wait for connection
   while (WiFi.status() != WL_CONNECTED)

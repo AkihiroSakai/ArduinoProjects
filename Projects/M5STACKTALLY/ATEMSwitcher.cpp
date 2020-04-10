@@ -43,7 +43,7 @@ void drawFotter_Switch(void)
     if(param.isAutoSwitch)
     {
       sprintf(buff,"TIME:%dsec",param.AutoSwitchTime/1000);
-      M5.Lcd.drawCentreString("EXIT", width / 6, height - 18, 2);
+      M5.Lcd.drawCentreString("", width / 6, height - 18, 2);
       M5.Lcd.drawCentreString("MANUAL", width / 2, height - 18, 2);
       M5.Lcd.drawCentreString(buff, width * 5 / 6, height - 18, 2);
     }
@@ -234,9 +234,10 @@ void exe_AutoSwitcherMode(void)
   static int checkDev =0;
   static uint8 CAMSTATUSbak[4] ={0xFF,0xFF,0xFF,0xFF};
 
-  if(AtemSwitcher.isConnected() != false)
+  if(AtemSwitcher.isConnected() != true)
   {
     funcmode = EN_FUNCMODE_HOME;  
+    exe_display(true);    
   }
 
   CAMSTATUS[checkDev] = AtemSwitcher.getTallyByIndexTallyFlags(checkDev);

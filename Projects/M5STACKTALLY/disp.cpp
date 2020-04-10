@@ -32,7 +32,7 @@
 #include "Setup.h"
 
 const char* funcmode_str[] = {
-  "M5-ATEM\0",
+  "M5-TALLY\0",
   "TALLY MODE\0",
   "SWITCHER MODE\0",
   "SETTINGS\0",
@@ -109,12 +109,12 @@ void drawHeader(bool init)
   int8_t batteryLv = M5.Power.getBatteryLevel();
   int chg_state;
   static int chg_state_bak = -1;
-  static int batteryLv_bak = 0;
+  static int8_t batteryLv_bak = 0;
 
 
-  if(batteryLv != batteryLv_bak|| init)
+  if(batteryLv != batteryLv_bak|| (init==true))
   {
-    M5.Lcd.fillRect(width - 70, 0, 70, 19, TFT_BLACK);
+    M5.Lcd.fillRect(width - 30, 0, 22, 19, TFT_BLACK);
     M5.Lcd.drawRect(width - 30, 2, 22, 15, TFT_WHITE);
     int btwidth = batteryLv / 5;
     uint16 color = TFT_GREEN;
@@ -125,6 +125,7 @@ void drawHeader(bool init)
       color = TFT_RED;
     }
     M5.Lcd.fillRect(width - 29, 3, btwidth, 13, color);
+    batteryLv_bak = batteryLv;
   }
 
   
@@ -145,16 +146,18 @@ void drawHeader(bool init)
     switch(chg_state)
     {
       case EN_CHARGED:
-          if(chg_state != chg_state_bak|| init)
+          if(chg_state != chg_state_bak|| (init==true))
           {
+                M5.Lcd.fillRect(width - 70, 0,  40 , 19, TFT_BLACK);
                  chg_state_bak = chg_state;
                  M5.Lcd.drawRightString("FULL", width - 31, 2, 2);
                  chg_state_bak = chg_state;
           }
       break;
       case   EN_CHARGING:
-          if(chg_state != chg_state_bak|| init)
+          if(chg_state != chg_state_bak|| (init==true))
           {
+                M5.Lcd.fillRect(width - 70, 0,  40 , 19, TFT_BLACK);
                  chg_state_bak = chg_state;
                   M5.Lcd.drawRightString("CHG", width - 31, 2, 2);
                  chg_state_bak = chg_state;
@@ -162,8 +165,9 @@ void drawHeader(bool init)
       break;
       case EN_BATTERY:
         
-        if(batteryLv != batteryLv_bak || chg_state_bak !=chg_state|| init)
+        if(batteryLv != batteryLv_bak || chg_state_bak !=chg_state|| (init==true))
         {
+              M5.Lcd.fillRect(width - 70, 0,  40 , 19, TFT_BLACK);
               sprintf(buff, "%d%%\0", batteryLv);
               M5.Lcd.drawRightString(buff, width - 31, 2, 2);
               batteryLv_bak = batteryLv;

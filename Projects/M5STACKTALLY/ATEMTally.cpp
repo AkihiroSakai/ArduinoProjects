@@ -40,7 +40,7 @@ void disp_Tally(bool init)
     }
     else
     {
-      Serial.print("LED OFF\n");
+      Serial.print("OFF\n");
       M5.Lcd.fillRect(0, 21, width, height - 41, TFT_BLACK);
     }
     tally_bak = tally;
@@ -68,9 +68,10 @@ void btn_tally(void)
 
 void exe_Tally(void)
 {
-  if(AtemSwitcher.isConnected() != false)
+  if(AtemSwitcher.isConnected() != true)
   {
     funcmode = EN_FUNCMODE_HOME;  
+    exe_display(true);
   }
   
   
