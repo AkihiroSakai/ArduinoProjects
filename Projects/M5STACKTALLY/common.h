@@ -8,7 +8,7 @@ typedef signed int int32;
 #define SSID_MAXLEN 256
 #define PASS_MAXLEN 256
 
-#define VERSION_STR "Ver:1.0.0"
+#define VERSION_STR "Ver:1.0.1"
 
 #pragma once
 typedef struct {

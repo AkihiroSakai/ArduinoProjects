@@ -150,7 +150,7 @@ void ATEMbase::runLoop(uint16_t delayTime) {
 	
 					if (headerBitmask & ATEM_headerCmd_HelloPacket)	{	// Respond to "Hello" packages:
 						_isConnected = true;
-Serial.print("ATEM connected.");
+Serial.println("ATEM connected.");
 						// _packetBuffer[12]	The ATEM will return a "2" in this return package of same length. If the ATEM returns "3" it means "fully booked" (no more clients can connect) and a "4" seems to be a kind of reconnect (seen when you drop the connection and the ATEM desperately tries to figure out what happened...)
 						// _packetBuffer[15]	This number seems to increment with about 3 each time a new client tries to connect to ATEM. It may be used to judge how many client connections has been made during the up-time of the switcher?
 						
@@ -371,10 +371,11 @@ void ATEMbase::_sendPacketBuffer(uint8_t length)	{
 #if 0
 	for(i=0;i<length;i++)
 	{
-		Serial.println(_packetBuffer[i]);
-		Serial.print(",");
+		char buff[5];
+		sprintf(buff,("%02X,",_packetBuffer[i]);
+		Serial.print(buff);
 	}
-	Serial.print("\n\r");
+	Serial.println("");
 #endif
 	_Udp.endPacket(); 	// TODO: Figure out why this may hang!!
 }

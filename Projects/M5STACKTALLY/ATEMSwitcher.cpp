@@ -53,7 +53,14 @@ void drawFotter_Switch(void)
       {
         M5.Lcd.drawCentreString("EXIT 3sec", width / 6, height - 18, 2);
         M5.Lcd.drawCentreString("AUTO", width / 2, height - 18, 2);
-        M5.Lcd.drawCentreString("to CAM3/4", width * 5 / 6, height - 18, 2);            
+        if(!is34CAMSwitch)
+        {
+          M5.Lcd.drawCentreString("to CAM3/4", width * 5 / 6, height - 18, 2);            
+        }
+        else
+        {
+          M5.Lcd.drawCentreString("to CAM1/2", width * 5 / 6, height - 18, 2);                      
+        }
       }
       else
       {
@@ -175,7 +182,7 @@ void btn_Switcher(void)
       if(M5.BtnA.pressedFor(3000))
       {
             funcmode = EN_FUNCMODE_HOME;
-            exe_display(true);        
+            exe_display(true);   
       }
       if (btnA)
       {
@@ -184,9 +191,9 @@ void btn_Switcher(void)
           }
           else
           {
-            AtemSwitcher.setProgramInputVideoSource(0, 1);
+//            AtemSwitcher.setProgramInputVideoSource(0, 1);
           }
-            exe_display(true);        
+          exe_display(true);        
       }
       else if (btnB)
       {
